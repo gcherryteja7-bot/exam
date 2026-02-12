@@ -21,6 +21,7 @@
             align-items: flex-start;
             padding-top: 40px;
             padding-bottom: 40px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* Pencil decoration */
@@ -54,6 +55,7 @@
             padding: 30px;
             margin-bottom: 20px;
             position: relative;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .card-header {
@@ -93,6 +95,7 @@
             outline: none;
             transition: border-bottom 0.3s;
             background: transparent;
+            color: #202124;
         }
 
         .form-input:focus {
@@ -251,9 +254,104 @@
             display: flex;
             justify-content: space-between;
         }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background-color: #673ab7;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .card {
+            background-color: #1e1e1e;
+            border-top-color: #bb86fc;
+        }
+
+        body.dark-theme .card-header h1,
+        body.dark-theme .form-label,
+        body.dark-theme .question-text,
+        body.dark-theme .option-label,
+        body.dark-theme .form-input {
+            color: #e0e0e0;
+        }
+
+        body.dark-theme .card-header p,
+        body.dark-theme #studentDetailsResult {
+            color: #b0b0b0;
+        }
+
+        body.dark-theme .form-input {
+            border-bottom-color: #444;
+        }
+
+        body.dark-theme .form-input:focus {
+            border-bottom-color: #bb86fc;
+        }
+
+        body.dark-theme .btn {
+            background-color: #bb86fc;
+            color: #121212;
+        }
+
+        body.dark-theme .btn:hover {
+            background-color: #a76ff5;
+        }
+
+        body.dark-theme .question-card {
+            background-color: #1e1e1e;
+        }
+
+        body.dark-theme .info-bar {
+            background: #333;
+            color: #bb86fc;
+        }
+
+        body.dark-theme .correct-answer {
+            background-color: #2a3b2a;
+            color: #a5d6a7;
+            border-color: #385e3a;
+        }
+
+        body.dark-theme .wrong-answer {
+            background-color: #4d2c2a;
+            color: #ef9a9a;
+            border-color: #8c4a4a;
+        }
+
+        body.dark-theme .status-correct {
+            background-color: #2a3b2a;
+            color: #a5d6a7;
+        }
+
+        body.dark-theme .status-wrong {
+            background-color: #4d2c2a;
+            color: #ef9a9a;
+        }
+
+        body.dark-theme .status-unanswered {
+            background-color: #333;
+            color: #b0b0b0;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle">Toggle Theme</button>
 
     <!-- Timer -->
     <div id="timerBar" class="timer-bar">
@@ -447,10 +545,17 @@
         const questionsContainer = document.getElementById('questionsContainer');
         const timerBar = document.getElementById('timerBar');
         const timerDisplay = document.getElementById('timer');
+        const themeToggle = document.getElementById('themeToggle');
 
         // Initialize
         function init() {
             renderQuestions();
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
         }
 
         // Render Questions
